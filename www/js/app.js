@@ -4,70 +4,119 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+  .constant('ConfigData', {
+    api_endpoint: 'http://flow-webapp.dev/api/'
   })
 
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
+
+  .run(function ($rootScope, $ionicPlatform, $ionicHistory, $window, $auth, $location) {
+
+    $rootScope.offline = true;
+
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+
       }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
+
+    if ($auth.isAuthenticated()) {
+      $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+    } else {
+      $location.path('login');
     }
+
   })
 
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
+  .config(function ($stateProvider, $urlRouterProvider, $authProvider, ConfigData) {
+    $stateProvider
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
+    //auth login
+      .state('login', {
+        cache: false,
+        url: "/login",
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      })
+
+      .state('logout', {
+        cache: false,
+        url: "/logout",
+        controller: 'LogoutCtrl'
+      })
+
+      // setup an abstract state for the tabs directive
+      .state('app', {
+        url: "/app",
+        abstract: true,
+        templateUrl: "templates/menu.html",
+        controller: "AppCtrl"
+      })
+
+      .state('app.home', {
+        cache: false,
+        url: "/home",
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/home.html',
+            controller: 'HomeCtrl'
+          }
+        },
+        authenticated: true
+      })
+
+      //outlets
+      .state('app.outlets', {
+        cache: false,
+        url: "/outlets",
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/outlets.html',
+            controller: 'OutletsCtrl'
+          }
+        },
+        authenticated: true
+      })
+
+      //scan
+      .state('app.scan', {
+        cache: false,
+        url: "/scan/:outletId",
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/scan.html',
+            controller: 'ScanCtrl'
+          }
+        },
+        authenticated: true
+      })
+
+      //scan
+      .state('app.confirm', {
+        cache: false,
+        url: "/confirm/:outletId/code/:code",
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/confirm.html',
+            controller: 'ConfirmCtrl'
+          }
+        },
+        authenticated: true
+      });
+
+    $urlRouterProvider.otherwise('/app/home');
+
+    $authProvider.loginUrl = ConfigData.api_endpoint + 'auth/signin';
+    $authProvider.tokenRoot = 'data';
+    $authProvider.httpInterceptor = true;
   });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
-});

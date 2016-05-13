@@ -1,0 +1,14 @@
+<ion-view view-title="Billeteries">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="outlet in outlets" href="#/app/scan/{{outlet.id}}">
+        {{outlet.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <div class="bar bar-footer bar-calm" ng-click="goBack()">
+    <div class="title"><i class="ion-chevron-left"></i> Retour</div>
+  </div>
+
+</ion-view>
