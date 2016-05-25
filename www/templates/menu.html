@@ -1,37 +1,19 @@
-<ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content>
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-    <ion-nav-bar class="bar-stable">
+  <!-- Dashboard Tab -->
+  <ion-tab title="Accueil" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/app/home">
+    <ion-nav-view name="tab-home"></ion-nav-view>
+  </ion-tab>
 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-      </ion-nav-buttons>
+  <!-- Chats Tab -->
+  <ion-tab title="Scanner" icon-off="ion-ios-barcode-outline" icon-on="ion-ios-barcode" ng-click="gotoScan()">
+    <ion-nav-view name="tab-scan"></ion-nav-view>
+  </ion-tab>
 
-    </ion-nav-bar>
+  <!-- Account Tab -->
+  <ion-tab title="Options" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/app/settings">
+    <ion-nav-view name="tab-settings"></ion-nav-view>
+  </ion-tab>
 
-    <ion-nav-view name="menuContent"></ion-nav-view>
 
-  </ion-side-menu-content>
-
-  <ion-side-menu side="left">
-
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
-
-    <ion-content>
-      <ion-list>
-        <ion-item menu-close href="#/app/home">
-          Accueil
-        </ion-item>
-        <ion-item menu-close href="#/app/outlets">
-          Scanner
-        </ion-item>
-        <ion-item menu-close href="#/logout">
-          Deconnexion
-        </ion-item>
-      </ion-list>
-    </ion-content>
-
-  </ion-side-menu>
-</ion-side-menus>
+</ion-tabs>

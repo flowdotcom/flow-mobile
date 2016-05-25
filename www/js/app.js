@@ -38,6 +38,10 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
 
   })
 
+  .config(function ($ionicConfigProvider) {
+    $ionicConfigProvider.views.maxCache(0);
+  })
+
   .config(function ($stateProvider, $urlRouterProvider, $authProvider, ConfigData) {
     $stateProvider
 
@@ -67,7 +71,7 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
         cache: false,
         url: "/home",
         views: {
-          'menuContent': {
+          'tab-home': {
             templateUrl: 'templates/home.html',
             controller: 'HomeCtrl'
           }
@@ -80,7 +84,7 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
         cache: false,
         url: "/outlets",
         views: {
-          'menuContent': {
+          'tab-scan': {
             templateUrl: 'templates/outlets.html',
             controller: 'OutletsCtrl'
           }
@@ -93,7 +97,7 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
         cache: false,
         url: "/scan/:outletId",
         views: {
-          'menuContent': {
+          'tab-scan': {
             templateUrl: 'templates/scan.html',
             controller: 'ScanCtrl'
           }
@@ -106,9 +110,22 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
         cache: false,
         url: "/confirm/:outletId/code/:code",
         views: {
-          'menuContent': {
+          'tab-scan': {
             templateUrl: 'templates/confirm.html',
             controller: 'ConfirmCtrl'
+          }
+        },
+        authenticated: true
+      })
+
+      //settings
+      .state('app.settings', {
+        cache: false,
+        url: "/settings",
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/settings.html',
+            controller: 'SettingsCtrl'
           }
         },
         authenticated: true

@@ -1,5 +1,5 @@
 <ion-view view-title="Scanner">
-  <ion-content>
+  <ion-content class="padding">
 
     <div class="list list-inset">
       <h1>Scanner un produit</h1>
@@ -22,7 +22,7 @@
 
     <div class="list list-inset" ng-show="keyboardVisible">
       <label class="item item-input">
-        <input type="text" ng-value="numbers">
+        <input type="text" ng-value="numbers" autofocus>
       </label>
     </div>
 
@@ -35,7 +35,7 @@
   </ion-content>
 
   <!-- Manual Code -->
-  <ion-digit-keyboard settings="keyboardSettings" ng-show="keyboardVisible"></ion-digit-keyboard>
+  <ion-digit-keyboard settings="keyboardSettings" ng-show="keyboardVisible" style="margin-bottom: 9.5%"></ion-digit-keyboard>
 
   <div class="bar bar-footer bar-calm" ng-click="goBack()" ng-hide="keyboardVisible">
     <div class="title"><i class="ion-chevron-left"></i> Retour</div>
