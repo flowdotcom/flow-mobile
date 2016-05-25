@@ -9788,3 +9788,31 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.flow-logo {
+  width: 60%;
+  display: block;
+  margin: auto; }
+
+.home-title {
+  text-align: center;
+  font-size: 3.5em;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#045FB4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+.app-title {
+  text-align: center;
+  font-size: 3em;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#045FB4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+.home-text {
+  text-align: center;
+  color: #4d4d4d; }
+
+.home-chevron {
+  text-align: center;
+  font-size: 4.5em;
+  color: midnightblue; }

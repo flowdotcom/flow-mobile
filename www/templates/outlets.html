@@ -1,14 +1,18 @@
 <ion-view view-title="Billeteries">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="outlet in outlets" href="#/app/scan/{{outlet.id}}">
-        {{outlet.name}}
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <br>
+        <h1 style="font-size:2em" class="app-title">CHOIX DU POINT DE VENTE</h1>
+        <br>
 
-  <div class="bar bar-footer bar-calm" ng-click="goBack()">
-    <div class="title"><i class="ion-chevron-left"></i> Retour</div>
-  </div>
+        <ion-list>
+            <ion-item class="home-text" style="font-size:1.5em; font-weight:600" ng-repeat="outlet in outlets" href="#/app/scan/{{outlet.id}}">
+              <i class="ion-arrow-right-b"></i> {{outlet.name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+    <div class="bar bar-footer bar-calm" ng-click="goBack()">
+        <div class="title"><i class="ion-chevron-left"></i> Retour</div>
+    </div>
 
 </ion-view>

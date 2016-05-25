@@ -1,5 +1,41 @@
 <ion-view view-title="Accueil">
-  <ion-content>
-    <h1>Accueil</h1>
-  </ion-content>
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <img class="flow-logo" src="../img/logo.png"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h1 class="home-title">VALIDATION</h1>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col col-80 col-offset-10">
+                <h3 class="home-text">
+                    Bienvenue, {{user.firstname}}
+                </h3>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col col-80 col-offset-10 home-chevron">
+                <i class="ion-chevron-down"></i>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-80 col-offset-10">
+                <a href="#/app/outlets" style="font-size:1.8em" class="button button-block button-positive">
+                    <i class="ion-qr-scanner"></i> Scanner un ticket
+                </a>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
