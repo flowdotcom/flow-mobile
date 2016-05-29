@@ -36,21 +36,23 @@ angular.module('flow')
 
 
     //// Methods ///////////////////////////////////////////
-    $scope.handleData = function (data) {
+    $scope.handleData = function (data, from) {
       var code = data.code;
 
       if (data.format.replace('-', '').replace('_', '') == 'EAN13') {
         code = data.code.slice(0, -1);
         code = code.substring(6, 12);
       }
-
-      $scope.decoder.stop();
+      
       $state.go('app.confirm', {outletId: $stateParams.outletId, code: code}, {reload: true});
     };
 
     $scope.scanQrBarcode = function () {
       $cordovaBarcodeScanner.scan().then(function (imageData) {
-        $scope.handleData(imageData);
+        $scope.handleData({
+          code: imageData.text,
+          format: imageData.format
+        });
       });
     };
 
