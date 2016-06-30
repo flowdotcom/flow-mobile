@@ -7,14 +7,14 @@
 
 
 angular.module('flow')
-    .controller('AppCtrl', function ($scope, $state, $rootScope, $interval, $log, $window, $ionicPopup, ConfigData, UserService) {
+  .controller('AppCtrl', function ($scope, $state, $rootScope, $interval, $log, $window, $ionicPopup, ConfigData, UserService, OfflineService) {
 
-        $scope.gotoScan = function () {
-            $state.go('app.outlets', {}, {reload: true});
-        };
+    $scope.gotoScan = function () {
+      $state.go('app.outlets', {}, {reload: true});
+    };
 
-        UserService.getUser().then(function (result) {
-            $rootScope.user = result.data;
-        });
-
+    UserService.getUser().then(function (result) {
+      $rootScope.user = result.data;
     });
+
+  });

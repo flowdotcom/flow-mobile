@@ -14,6 +14,11 @@ angular.module('flow')
     //// Services Calls ///////////////////////////////////////////
     OutletsService.getAllOutlets().then(function (outlets) {
       $scope.outlets = outlets.data;
+      $window.localStorage.setItem('outlets', JSON.stringify($scope.outlets));
+    }, function () {
+      if ($window.localStorage.getItem('outlets')) {
+        $scope.outlets = JSON.parse($window.localStorage.getItem('outlets'));
+      }
     });
 
 

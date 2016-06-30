@@ -10,7 +10,10 @@
     "quagga": "^0.11.0",
     "angular-qr-scanner": "^0.1.0",
     "ionic-numberpicker": "^1.0.1",
-    "ion-digit-keyboard": "https://github.com/skol-pro/ion-digit-keyboard.git"
+    "ion-digit-keyboard": "https://github.com/skol-pro/ion-digit-keyboard.git",
+    "ngstorage": "^0.3.10",
+    "angular-local-storage": "^0.2.7",
+    "angular-moment": "^0.10.3"
   },
   "resolutions": {
     "angular-animate": "1.5.3",

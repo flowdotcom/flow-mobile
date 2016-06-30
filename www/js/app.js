@@ -4,11 +4,12 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'])
+angular.module('flow', ['ionic', 'satellizer', 'LocalStorageModule', 'ngCordova', 'ion-digit-keyboard', 'ionic-numberpicker', 'angularMoment'])
 
 
   .constant('ConfigData', {
-    api_endpoint: 'http://n64.ovh/api/'
+    api_endpoint: 'http://flow-webapp.dev/api/'
+    //api_endpoint: 'http://n64.ovh/api/'
   })
 
 
@@ -17,15 +18,11 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
     $rootScope.offline = true;
 
     $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         cordova.plugins.Keyboard.disableScroll(true);
-
       }
       if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
     });
@@ -36,6 +33,11 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
       $location.path('login');
     }
 
+  })
+
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider.setPrefix('flow');
+    localStorageServiceProvider.setStorageType('localStorage');
   })
 
   .config(function ($ionicConfigProvider) {
@@ -126,6 +128,19 @@ angular.module('flow', ['ionic', 'satellizer', 'ngCordova', 'ion-digit-keyboard'
           'tab-settings': {
             templateUrl: 'templates/settings.html',
             controller: 'SettingsCtrl'
+          }
+        },
+        authenticated: true
+      })
+
+      //settings - failed
+      .state('app.failed', {
+        cache: false,
+        url: "/failed",
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/failed.html',
+            controller: 'FailedCtrl'
           }
         },
         authenticated: true

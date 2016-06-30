@@ -7,6 +7,10 @@
 
 
 angular.module('flow')
-  .controller('HomeCtrl', function ($scope, $state, $rootScope, $window, $log) {
+  .controller('HomeCtrl', function ($scope, $state, $rootScope, $window, $log, OfflineService) {
+
+    $scope.updateDB = function () {
+      OfflineService.initializeDatabase();
+    };
 
   });

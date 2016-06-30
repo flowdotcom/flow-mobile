@@ -7,11 +7,11 @@
 
 
 angular.module('flow')
-  .controller('ScanCtrl', function ($scope, $state, $stateParams, $rootScope, $window, $log, BookingService, $ionicPopup, $cordovaBarcodeScanner) {
+  .controller('ScanCtrl', function ($scope, $state, $stateParams, $ionicPlatform, $rootScope, $window, $log, BookingService, $ionicPopup, $cordovaBarcodeScanner) {
 
     //// Variables /////////////////////////////////////////
     $scope.is_mobile = !!(ionic.Platform.platform() == 'android' || ionic.Platform.platform() == 'ios');
-    $scope.decoder = null;
+    $rootScope.decoder = null;
     $scope.numbers = "";
 
     $scope.keyboardVisible = false;
@@ -43,7 +43,14 @@ angular.module('flow')
         code = data.code.slice(0, -1);
         code = code.substring(6, 12);
       }
-      
+
+      if ($rootScope.decoder) {
+        $log.debug($rootScope.decoder.getWorker());
+        $rootScope.decoder.getWorker().terminate();
+        $rootScope.decoder.stop();
+        delete $rootScope.decoder;
+      }
+
       $state.go('app.confirm', {outletId: $stateParams.outletId, code: code}, {reload: true});
     };
 
@@ -57,15 +64,19 @@ angular.module('flow')
     };
 
     if (!$scope.is_mobile) {
-      $scope.decoder = new WebCodeCamJS("canvas").init({
-        tryVertical: true,
-        codeRepetition: false,
-        beep: 'lib/webcodecam/audio/beep.mp3',
-        decoderWorker: 'lib/webcodecam/js/DecoderWorker.js',
-        resultFunction: $scope.handleData
-      });
-      $scope.decoder.init();
-      $scope.decoder.play();
+
+      if (!$rootScope.decoder) {
+        $rootScope.decoder = new WebCodeCamJS("canvas").init({
+          tryVertical: true,
+          codeRepetition: false,
+          beep: 'lib/webcodecam/audio/tish.mp3',
+          decoderWorker: 'lib/webcodecam/js/DecoderWorker.js',
+          resultFunction: $scope.handleData
+        });
+
+      }
+
+      $rootScope.decoder.play();
     }
 
     $scope.toogleKeyboard = function () {

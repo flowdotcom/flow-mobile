@@ -1,0 +1,29 @@
+<ion-view view-title="Billeteries">
+  <ion-content>
+    <br>
+    <h1 style="font-size:2em" class="app-title">Erreurs de synchonisation</h1>
+    <p style="font-size:1em" class="app-title">Effectuez les changements sur l'application web Flow</p>
+    <br>
+
+    <ion-list ng-if="failed">
+      <ion-item class="home-text" style="font-size:1.5em; font-weight:600" ng-repeat="fail in failed">
+        Code : {{fail.code}} ( valeur : {{fail.json_check}} )
+      </ion-item>
+    </ion-list>
+
+    <div class="card" ng-hide="failed">
+      <div class="item item-text-wrap">
+        Aucune erreur n'est apparue
+      </div>
+    </div>
+
+    <button class="button button-block button-energized" ng-click="clearFailed()">
+      <i class="ion-trash-a"></i>Vider la liste
+    </button>
+  </ion-content>
+
+  <div class="bar bar-footer bar-calm" ng-click="goBack()">
+    <div class="title"><i class="ion-chevron-left"></i> Retour</div>
+  </div>
+
+</ion-view>
