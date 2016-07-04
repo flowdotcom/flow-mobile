@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flow')
-  .service('OfflineService', function (ConfigData, $http, $log, $window, $ionicLoading, $rootScope, $interval, localStorageService, moment, $q) {
+  .service('OfflineService', function (ConfigData, $http, $log, $window, $ionicLoading, $rootScope, $interval, localStorageService, moment, $q, OfflineService) {
 
     this.initializeDatabase = function () {
       $ionicLoading.show({template: 'Chargement...'});
@@ -111,7 +111,9 @@ angular.module('flow')
         $interval.cancel($rootScope.interval);
       }
 
-      $rootScope.interval = $interval(this.uploadChanges(), 30000);
+      $rootScope.interval = $interval(function () {
+        OfflineService.uploadChanges();
+      }, 30000);
 
       q.resolve(true);
 
