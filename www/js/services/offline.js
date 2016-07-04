@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flow')
-  .service('OfflineService', function (ConfigData, $http, $log, $window, $ionicLoading, $rootScope, $interval, localStorageService, moment, $q, OfflineService) {
+  .service('OfflineService', function (ConfigData, $http, $log, $window, $ionicLoading, $rootScope, $interval, localStorageService, moment, $q) {
 
     this.initializeDatabase = function () {
       $ionicLoading.show({template: 'Chargement...'});
@@ -80,29 +80,6 @@ angular.module('flow')
 
     };
 
-    this.uploadChanges = function () {
-
-      $http.post(ConfigData.api_endpoint + "booking/update", JSON.parse(localStorage.getItem('updates'))).then(function (result) {
-
-        if (result.data.status == 'ok') {
-
-          window.localStorage.setItem('updates', JSON.stringify({}));
-
-        } else if (result.data.status == 'partial') {
-
-          window.localStorage.setItem('updates', JSON.stringify({}));
-          window.localStorage.setItem('failed', JSON.stringify(result.data.failed));
-
-        }
-
-        $http.get(ConfigData.api_endpoint + "booking/fetch").then(function (result) {
-          angular.forEach(result.data, function (booking) {
-            localStorageService.set(booking.barcode, booking);
-          });
-        });
-      });
-    };
-
     this.scheduleUpdate = function () {
 
       var q = $q.defer();
@@ -112,7 +89,25 @@ angular.module('flow')
       }
 
       $rootScope.interval = $interval(function () {
-        OfflineService.uploadChanges();
+        $http.post(ConfigData.api_endpoint + "booking/update", JSON.parse(localStorage.getItem('updates'))).then(function (result) {
+
+          if (result.data.status == 'ok') {
+
+            window.localStorage.setItem('updates', JSON.stringify({}));
+
+          } else if (result.data.status == 'partial') {
+
+            window.localStorage.setItem('updates', JSON.stringify({}));
+            window.localStorage.setItem('failed', JSON.stringify(result.data.failed));
+
+          }
+
+          $http.get(ConfigData.api_endpoint + "booking/fetch").then(function (result) {
+            angular.forEach(result.data, function (booking) {
+              localStorageService.set(booking.barcode, booking);
+            });
+          });
+        });
       }, 30000);
 
       q.resolve(true);
