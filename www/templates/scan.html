@@ -1,5 +1,9 @@
 <ion-view view-title="Scanner">
     <ion-content class="padding">
+      <ion-refresher
+        pulling-text="Tirer pour actualiser la base de données"
+        on-refresh="refreshDatabase()">
+      </ion-refresher>
 
         <div class="list list-inset">
             <h1 class="app-title">SCANNER</h1>

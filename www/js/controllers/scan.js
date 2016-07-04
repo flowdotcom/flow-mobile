@@ -7,7 +7,7 @@
 
 
 angular.module('flow')
-  .controller('ScanCtrl', function ($scope, $state, $stateParams, $ionicPlatform, $rootScope, $window, $log, BookingService, $ionicPopup, $cordovaBarcodeScanner) {
+  .controller('ScanCtrl', function ($scope, $state, $stateParams, $ionicPlatform, $rootScope, $window, $log, BookingService, $ionicPopup, OfflineService, $cordovaBarcodeScanner) {
 
     //// Variables /////////////////////////////////////////
     $scope.is_mobile = !!(ionic.Platform.platform() == 'android' || ionic.Platform.platform() == 'ios');
@@ -69,7 +69,7 @@ angular.module('flow')
         $rootScope.decoder = new WebCodeCamJS("canvas").init({
           tryVertical: true,
           codeRepetition: false,
-          beep: 'lib/webcodecam/audio/tish.mp3',
+          beep: 'lib/webcodecam/audio/beep.mp3',
           decoderWorker: 'lib/webcodecam/js/DecoderWorker.js',
           resultFunction: $scope.handleData
         });
@@ -81,6 +81,11 @@ angular.module('flow')
 
     $scope.toogleKeyboard = function () {
       $scope.keyboardVisible = !$scope.keyboardVisible;
+    };
+
+    $scope.refreshDatabase = function () {
+      OfflineService.initializeDatabase();
+      $scope.$broadcast('scroll.refreshComplete');
     };
 
     $scope.goBack = function () {

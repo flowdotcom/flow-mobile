@@ -8,7 +8,7 @@ angular.module('flow', ['ionic', 'satellizer', 'LocalStorageModule', 'ngCordova'
 
 
   .constant('ConfigData', {
-    api_endpoint: 'http://flow-webapp.dev/api/'
+    api_endpoint: 'http://flow-solution.fr/api/'
     //api_endpoint: 'http://n64.ovh/api/'
   })
 
