@@ -11,7 +11,18 @@ angular.module('flow')
 
         //// Variables /////////////////////////////////////////
         $scope.is_mobile = !!(ionic.Platform.platform() == 'android' || ionic.Platform.platform() == 'ios');
-        $rootScope.decoder = null;
+
+      $scope.deviceInformation = ionic.Platform.device();
+      $scope.isWebView = ionic.Platform.isWebView();
+      $scope.isIPad = ionic.Platform.isIPad();
+      $scope.isIOS = ionic.Platform.isIOS();
+      $scope.isAndroid = ionic.Platform.isAndroid();
+      $scope.isWindowsPhone = ionic.Platform.isWindowsPhone();
+      $scope.currentPlatform = ionic.Platform.platform();
+      $scope.currentPlatformVersion = ionic.Platform.version();
+
+
+      $rootScope.decoder = null;
         $scope.numbers = "";
         var outlets = JSON.parse($window.localStorage.getItem('outlets'));
         $scope.currentOutlet = "";
