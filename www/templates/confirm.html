@@ -3,8 +3,8 @@
 
     <div class="row" ng-if="message">
       <div class="col">
-        <h1>Erreur !</h1>
-        <h2>{{message}}</h2>
+        <h1 class="app-title">Erreur</h1>
+        <h2 class="home-text">{{message}}</h2>
       </div>
     </div>
 
@@ -19,9 +19,8 @@
 
     <div class="row" ng-if="!message">
       <div class="col col-80 col-offset-10">
-        <label class="item item-input">
-          <input type="text" ng-model="current" readonly>
-        </label>
+        <h3 class="home-text">Entrées à valider</h3>
+          <h3 class="app-title" ng-model="current" readonly>{{current}} / {{base}}</h3>
       </div>
     </div>
 
@@ -37,7 +36,7 @@
 
     <div class="row" ng-if="!message">
       <div class="col col-80 col-offset-10">
-        <button href="#/app/outlets" style="font-size:1.8em" class="button button-block button-calm" ng-click="send()">
+        <button style="font-size:1.8em" class="button button-block button-calm" ng-click="send()">
           <i class="android-send"></i> Envoyer
         </button>
       </div>

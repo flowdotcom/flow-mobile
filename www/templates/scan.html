@@ -1,12 +1,13 @@
 <ion-view view-title="Scanner">
     <ion-content class="padding">
       <ion-refresher
-        pulling-text="Tirer pour actualiser la base de données"
+        pulling-text="Faites glisser pour actualiser la base de données"
         on-refresh="refreshDatabase()">
       </ion-refresher>
 
         <div class="list list-inset">
             <h1 class="app-title">SCANNER</h1>
+            <h2 class="home-text">{{currentOutlet}}</h2>
         </div>
 
         <!-- Browser barcode scanner -->
@@ -23,7 +24,7 @@
         <!-- Android / IOS barcode scanner -->
 
         <div class="list list-ins¨et" ng-if="is_mobile" ng-hide="keyboardVisible">
-            <button class="button button-block button-assertive" ng-click="scanQrBarcode()">
+            <button style="font-size:1.5em;" class="button button-block button-assertive" ng-click="scanQrBarcode()">
                 <i class="icon ion-qr-scanner"></i> Scanner un Code Barre/QR
             </button>
         </div>
@@ -31,12 +32,12 @@
 
         <div class="list list-inset" ng-show="keyboardVisible">
             <label class="item item-input">
-                <input type="text" ng-value="numbers" autofocus focus-me/>
+                <input style="font-size:1.5em;" id="input-tab" type="text" ng-model="$parent.numbers"  focus-me="keyboardVisible" my-enter="goConfirm()" autofocus/>
             </label>
         </div>
 
         <div class="list list-inset" ng-hide="keyboardVisible">
-            <button class="button button-block button-royal" ng-click="toogleKeyboard()">
+            <button style="font-size:1.5em;" class="button button-block button-royal" ng-click="toogleKeyboard()">
                 <i class="icon ion-social-twitch-outline"></i> Validation par numéro
             </button>
         </div>
