@@ -110,7 +110,6 @@ angular.module('flow')
 
                 OfflineService.updateBooking($scope.code, $scope.booking).then(function () {
                     OfflineService.scheduleUpdate().then(function () {
-
                         $scope.goBack();
                     });
                 });
@@ -123,10 +122,7 @@ angular.module('flow')
 
         //// Methods  /////////////////////////////////////////
         $scope.goBack = function () {
-            $log.debug("22");
             $state.go('app.scan', {outletId: $stateParams.outletId});
-
-
         };
 
     });
