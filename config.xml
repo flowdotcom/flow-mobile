@@ -29,5 +29,7 @@
   </feature>
   
   <plugin name="cordova-plugin-whitelist" source="npm"/>
+  <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+ 
   
 </widget>
