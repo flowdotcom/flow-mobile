@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.flowmobile646396" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>flow-mobile</name>
+  <name>Flow-Validation</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Application Flow pour validation des tickets
     </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+    <author email="flow.devteam@gmail.com" href="https://flow-solution.fr/">
+      Flow Dev Team
     </author>
   <content src="index.html"/>
 
@@ -30,6 +30,5 @@
   
   <plugin name="cordova-plugin-whitelist" source="npm"/>
   <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
- 
   
 </widget>
