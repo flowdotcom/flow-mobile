@@ -9,8 +9,7 @@
     </author>
   <content src="index.html"/>
 
-  <access origin="*"/>
-  <!-- A wildcard can be used to whitelist the entire network,over HTTP and HTTPS. -->
+  <access origin="*" />
   <allow-navigation href="*" />
 
   <preference name="webviewbounce" value="false"/>
