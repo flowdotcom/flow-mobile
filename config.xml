@@ -10,6 +10,7 @@
   <content src="index.html"/>
 
   <access origin="*"/>
+  <!-- A wildcard can be used to whitelist the entire network,over HTTP and HTTPS. -->
   <allow-navigation href="*" />
 
   <preference name="webviewbounce" value="false"/>
@@ -27,6 +28,6 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
 
-
-
+  <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
+  
 </widget>
